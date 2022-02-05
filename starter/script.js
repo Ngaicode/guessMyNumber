@@ -70,8 +70,19 @@ document.querySelector(".check").addEventListener("click", function () {
   // the second logical steps is to cover all the other different scenarios that might happen
 
   // when the guessed number is strictly equal to the secretnumber
+  // WHEN PLAYER WINS
   else if (guess === secretNumber) {
     document.querySelector(".message").textContent = "Correct number";
+
+    // STYLE MANIPULATION
+    // when we need to access the style poperties of an element ; we do so in the following steps
+    // 1.First we select the element that we want to manipulate
+    // 2.we use the .style property  using dot natation on the element that has been selected
+    // 3.then (using also the dot notation) we select the name of the property that we want to manipulate
+    // 4.finally we pass in the value of the css stle property that we want to manipulate.THE VALUE WE PASS IN MUST ALWAYS BE A STRING
+    document.querySelector("body").style.backgroundColor = "#60b347";
+    document.querySelector(".number").style.width = "30rem";
+    // WHEN THE GUESS IS TOO HIGH
   } else if (guess > secretNumber) {
     if (score > 1) {
       document.querySelector(".message").textContent = "Too high!!!";
@@ -83,6 +94,7 @@ document.querySelector(".check").addEventListener("click", function () {
       document.querySelector(".message").textContent = "you lost the game !!!";
       document.querySelector(".score").textContent = 0;
     }
+    // WHEN THE GUESS IS TOO LOW
   } else if (guess < secretNumber) {
     if (score > 1) {
       document.querySelector(".message").textContent = "Too low!!!";
