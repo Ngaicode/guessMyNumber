@@ -50,16 +50,26 @@ const secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 document.querySelector(".number").textContent = secretNumber;
 
+// in order to listen for events ,we first need to select the element where the event should happen
+// addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code to be executed whenever a certain event occurs
+// event handler funcrion will be called by te javascript engine as soon as the event happens
+
+// calling the addEventListener() function/method
+// you call this method/function on the element that you want to 'listen' for an event
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
   console.log(guess, typeof guess);
+
   // usually,in the case where we get input from a user we have to check wether the input value actually exists or not
   //  usually the first scenario is to assume that there is no input from the user then react to that somehow
   //   the code below will only run if there's no input from the user,ie if guess is false
   if (!guess) {
     document.querySelector(".message").textContent = "No number!!!";
   }
+
   // the second logical steps is to cover all the other different scenarios that might happen
+
+  // when the guessed number is strictly equal to the secretnumber
   else if (guess === secretNumber) {
     document.querySelector(".message").textContent = "Correct number";
   } else if (guess > secretNumber) {
