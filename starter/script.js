@@ -20,5 +20,5 @@
 
 // .queryselector() is a method available on the Document object
 // the document.queryselector() method returns the first element within the document that matches the specified selector.If no match is found,null is returned
-
-console.log(document.querySelector(".message").textContent);
+const text = document.querySelector(".message").textContent;
+console.log(text);
