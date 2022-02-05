@@ -17,11 +17,11 @@
 // we can select html elements with javascript using their respective class and ID names ,or even the html element tags themselves
 // we need to pass a selector as an argument to the queryselector method,this selector is same as the selectors we would use in css
 // the selected element has to be a string
-
+// the queryselector method returns an element
 // .queryselector() is a method available on the Document object
 // the queryselector() method selects an element with the specified selector
 // the document.queryselector() method returns the first element within the document that matches the specified selector.If no match is found,null is returned
-const text = document.querySelector(".message").textContent;
+/*const text = document.querySelector(".message").textContent;
 console.log(text);
 
 // ---selecting and manipulating more elements---
@@ -38,4 +38,20 @@ document.querySelector(".score").textContent = 17;
 // the .value property gets us the value of a HTML element
 // we can also use the .value property to set the value
 document.querySelector(".guess").value = 21;
-console.log(document.querySelector(".guess").value);
+console.log(document.querySelector(".guess").value);*/
+
+// HANDLING EVENTS
+// in order to listen for events ,we first need to select the element where the event should happen
+// addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code to be executed whenever a certain event occurs
+// event handler funcrion will be called by te javascript engine as soon as the event happens
+
+document.querySelector(".check").addEventListener("click", function () {
+  const guess = Number(document.querySelector(".guess").value);
+  console.log(guess, typeof guess);
+  // usually,in the case where we get input from a user we have to check wether the input value actually exists or not
+  //  usually the first scenario is to assume that there is no input from the user then react to that somehow
+  //   the code below will only run if there's no input from the user,ie if guess is false
+  if (!guess) {
+    document.querySelector(".message").textContent = "No number";
+  }
+});
