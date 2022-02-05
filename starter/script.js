@@ -19,6 +19,23 @@
 // the selected element has to be a string
 
 // .queryselector() is a method available on the Document object
+// the queryselector() method selects an element with the specified selector
 // the document.queryselector() method returns the first element within the document that matches the specified selector.If no match is found,null is returned
 const text = document.querySelector(".message").textContent;
 console.log(text);
+
+// ---selecting and manipulating more elements---
+
+// changing the textContent
+document.querySelector(".message").textContent = "correct number";
+
+console.log(document.querySelector(".message").textContent);
+
+// when selecting elements we do so using their respective css selector names as strings
+document.querySelector(".number").textContent = 13;
+document.querySelector(".score").textContent = 17;
+
+// the .value property gets us the value of a HTML element
+// we can also use the .value property to set the value
+document.querySelector(".guess").value = 21;
+console.log(document.querySelector(".guess").value);
