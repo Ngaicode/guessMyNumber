@@ -45,6 +45,11 @@ console.log(document.querySelector(".guess").value);*/
 // addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code to be executed whenever a certain event occurs
 // event handler funcrion will be called by te javascript engine as soon as the event happens
 
+// GENERATING THE RANDOM NUMBER
+const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let score = 20;
+document.querySelector(".number").textContent = secretNumber;
+
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
   console.log(guess, typeof guess);
@@ -52,6 +57,32 @@ document.querySelector(".check").addEventListener("click", function () {
   //  usually the first scenario is to assume that there is no input from the user then react to that somehow
   //   the code below will only run if there's no input from the user,ie if guess is false
   if (!guess) {
-    document.querySelector(".message").textContent = "No number";
+    document.querySelector(".message").textContent = "No number!!!";
+  }
+  // the second logical steps is to cover all the other different scenarios that might happen
+  else if (guess === secretNumber) {
+    document.querySelector(".message").textContent = "Correct number";
+  } else if (guess > secretNumber) {
+    if (score > 1) {
+      document.querySelector(".message").textContent = "Too high!!!";
+      // with every failed guess we decrease the value of the score by one
+      score--;
+      // updating the textcontent with the new score value
+      document.querySelector(".score").textContent = score;
+    } else {
+      document.querySelector(".message").textContent = "you lost the game !!!";
+      document.querySelector(".score").textContent = 0;
+    }
+  } else if (guess < secretNumber) {
+    if (score > 1) {
+      document.querySelector(".message").textContent = "Too low!!!";
+      // with every failed guess we decrease the value of the score by one
+      score--;
+      // updating the textcontent with the new score value
+      document.querySelector(".score").textContent = score;
+    } else {
+      document.querySelector(".message").textContent = "you lost the game !!!";
+      document.querySelector(".score").textContent = 0;
+    }
   }
 });
