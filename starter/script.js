@@ -46,14 +46,15 @@ console.log(document.querySelector(".guess").value);*/
 // event handler funcrion will be called by te javascript engine as soon as the event happens
 
 // GENERATING THE RANDOM NUMBER
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
-document.querySelector(".number").textContent = secretNumber;
+let highScore = 0;
 
 // in order to listen for events ,we first need to select the element where the event should happen
 // addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code to be executed whenever a certain event occurs
 // event handler funcrion will be called by te javascript engine as soon as the event happens
 
+// EVENT LISTENERS AND EVENT HANDLERS
 // calling the addEventListener() function/method
 // you call this method/function on the element that you want to 'listen' for an event
 document.querySelector(".check").addEventListener("click", function () {
@@ -73,6 +74,7 @@ document.querySelector(".check").addEventListener("click", function () {
   // WHEN PLAYER WINS
   else if (guess === secretNumber) {
     document.querySelector(".message").textContent = "Correct number";
+    document.querySelector(".number").textContent = secretNumber;
 
     // STYLE MANIPULATION
     // when we need to access the style poperties of an element ; we do so in the following steps
@@ -82,6 +84,12 @@ document.querySelector(".check").addEventListener("click", function () {
     // 4.finally we pass in the value of the css stle property that we want to manipulate.THE VALUE WE PASS IN MUST ALWAYS BE A STRING
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
+
+    // setting the highscore
+    if (score > highScore) {
+      highScore = score;
+      document.querySelector(".highscore").textContent = highScore;
+    }
     // WHEN THE GUESS IS TOO HIGH
   } else if (guess > secretNumber) {
     if (score > 1) {
@@ -107,4 +115,16 @@ document.querySelector(".check").addEventListener("click", function () {
       document.querySelector(".score").textContent = 0;
     }
   }
+});
+
+// event listener for the again! button
+document.querySelector(".again").addEventListener("click", function () {
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  score = 20;
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".score").textContent = score;
+  document.querySelector(".message").textContent = "Start guessing ...";
+  document.querySelector(".guess").value = "";
+  document.querySelector("body").style.backgroundColor = "#222";
+  document.querySelector(".number").style.width = "15rem";
 });
