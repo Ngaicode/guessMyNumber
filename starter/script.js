@@ -48,15 +48,18 @@ console.log(document.querySelector(".guess").value);*/
 // these are the state variables of our application
 // GENERATING THE RANDOM NUMBER
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
+// the score is always 20 when the game starts
 let score = 20;
+// the highscore starts at zero,it will later be updated by the event handler
 let highScore = 0;
+// function that prints a string  that it receives as the argument on to the DOM
 const displayMessage = function (message) {
   document.querySelector(".message").textContent = message;
 };
 
 // in order to listen for events ,we first need to select the element where the event should happen
-// addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code to be executed whenever a certain event occurs
-// event handler funcrion will be called by te javascript engine as soon as the event happens
+// addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code  logic to be executed whenever a certain event occurs
+// event handler functions will be called by the javascript engine as soon as the event happens
 
 // EVENT LISTENERS AND EVENT HANDLERS
 // calling the addEventListener() function/method
@@ -68,6 +71,7 @@ document.querySelector(".check").addEventListener("click", function () {
   // usually,in the case where we get input from a user we have to check wether the input value actually exists or not
   //  usually the first scenario is to assume that there is no input from the user then react to that somehow
   //   the code below will only run if there's no input from the user,ie if guess is false
+  // if the input guess exists ,therfore it's true ,the code block below wont run since !true is false
   if (!guess) {
     // document.querySelector(".message").textContent = "No number!!!";
     displayMessage("No number!!!");
@@ -75,11 +79,12 @@ document.querySelector(".check").addEventListener("click", function () {
 
   // the second logical steps is to cover all the other different scenarios that might happen
 
-  // when the guessed number is strictly equal to the secretnumber
+  // when the guessed number is strictly equal to the secretNumber
   // WHEN PLAYER WINS
   else if (guess === secretNumber) {
     // document.querySelector(".message").textContent = "Correct number";
     displayMessage("Correct number!!!");
+    // displays the secret number on the screen
     document.querySelector(".number").textContent = secretNumber;
 
     // STYLE MANIPULATION
@@ -87,13 +92,15 @@ document.querySelector(".check").addEventListener("click", function () {
     // 1.First we select the element that we want to manipulate
     // 2.we use the .style property  using dot natation on the element that has been selected
     // 3.then (using also the dot notation) we select the name of the property that we want to manipulate
-    // 4.finally we pass in the value of the css stle property that we want to manipulate.THE VALUE WE PASS IN MUST ALWAYS BE A STRING
+    // 4.finally we pass in the value of the css style property that we want to manipulate.THE VALUE WE PASS IN MUST ALWAYS BE A STRING
+    // setting the body's  background colour to green when the player wins the game
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
 
     // setting the highscore
     if (score > highScore) {
       highScore = score;
+      // displays the highscore
       document.querySelector(".highscore").textContent = highScore;
     }
   }
@@ -102,6 +109,7 @@ document.querySelector(".check").addEventListener("click", function () {
     if (score > 1) {
       // document.querySelector(".message").textContent =
       //   guess > secretNumber ? "Too high!!!" : "Too low !!!";
+      // a ternary operator that chooses the string to be displayed
       displayMessage(guess > secretNumber ? "Too high!!!" : "Too low !!!");
 
       // with every failed guess we decrease the value of the score by one
@@ -142,14 +150,24 @@ document.querySelector(".check").addEventListener("click", function () {
 });
 
 // event listener for the again! button
+// this is the logic that we want to implement when the player clicks the again button
+// 1.The first thing we do is to select the element that we want to listen for an event,then we add an addEventListener() method/function to it
+// the logic that we want to implement should go into the function body of the event handler function expression
 document.querySelector(".again").addEventListener("click", function () {
+  // we select a new secret number
   secretNumber = Math.trunc(Math.random() * 20) + 1;
+  // set the score back to 20
   score = 20;
+  // hide the secret number
   document.querySelector(".number").textContent = "?";
+  // display the new current score as back to 20 when the game restarts
   document.querySelector(".score").textContent = score;
   // document.querySelector(".message").textContent = "Start guessing ...";
   displayMessage("Start guessing ...");
+  // set the input value back to an empty string
   document.querySelector(".guess").value = "";
+  // change the  body's background colour back to black
   document.querySelector("body").style.backgroundColor = "#222";
+  // minimizing the width of this particular element
   document.querySelector(".number").style.width = "15rem";
 });
