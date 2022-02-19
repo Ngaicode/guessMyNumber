@@ -17,8 +17,8 @@
 // we can select html elements with javascript using their respective class and ID names ,or even the html element tags themselves
 // we need to pass a selector as an argument to the queryselector method,this selector is same as the selectors we would use in css
 // the selected element has to be a string
-// the queryselector method returns an element
-// .queryselector() is a method available on the Document object
+// the queryselector method returns the first element that matches  the specified selector
+// .queryselector() is a METHOD available on the DOCUMENT OBJECT
 // the queryselector() method selects an element with the specified selector
 // the document.queryselector() method returns the first element within the document that matches the specified selector.If no match is found,null is returned
 /*const text = document.querySelector(".message").textContent;
@@ -45,6 +45,7 @@ console.log(document.querySelector(".guess").value);*/
 // addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code to be executed whenever a certain event occurs
 // event handler funcrion will be called by te javascript engine as soon as the event happens
 
+// GLOBAL  SCOPE
 // these are the state variables of our application
 // GENERATING THE RANDOM NUMBER
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
@@ -56,6 +57,15 @@ let highScore = 0;
 const displayMessage = function (message) {
   document.querySelector(".message").textContent = message;
 };
+
+// -----FUNCTIONS----
+// functions create their own scopes and once the function get's called it creates its own execution context in the call stack
+// var is function scoped
+
+// -----blocks-----
+// blocks create their own scopes but don't create execution contexts ,only function callss and the global scope get execution context
+// let and const are block scoped
+// variables declared by var will be acccessible outside the code block
 
 // in order to listen for events ,we first need to select the element where the event should happen
 // addEventListener() method is a special function that accepts two arguments,the FIRST argument should be the TYPE of EVENT to listen for;the second bit is an EVENT HANDLER which is a function expression that contains the code  logic to be executed whenever a certain event occurs
@@ -99,6 +109,7 @@ document.querySelector(".check").addEventListener("click", function () {
 
     // setting the highscore
     if (score > highScore) {
+      // dynamically changing the value of the highscore only if the current score is greater than the current highscore
       highScore = score;
       // displays the highscore
       document.querySelector(".highscore").textContent = highScore;
