@@ -182,3 +182,7 @@ document.querySelector(".again").addEventListener("click", function () {
   // minimizing the width of this particular element
   document.querySelector(".number").style.width = "15rem";
 });
+
+
+
+console.log("meow")
